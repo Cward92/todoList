@@ -1,17 +1,16 @@
 import React from 'react';
 
 function Todo(props) {
-    console.log(props);
     return (
         <li>
             <div>
-              <input id='todo-0' type='checkbox' defaultChecked={true} />
+              <input id='todo-0' type='checkbox' defaultChecked={props.completed} />
               <label className='todo-label'>
                 {props.name}
                 </label>
             </div>
             <div className='btn-group'>
-              <button type='button' className='btn'>
+              <button type='button' className='btn btn-secondary'>
                 Edit
               </button>
               <button type='button' className='btn btn-danger' onClick={props.deleteItem}>

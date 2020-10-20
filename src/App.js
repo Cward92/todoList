@@ -1,6 +1,5 @@
 import React from 'react';
-import Todo from './Todo.js';
-import './App.css';
+import Todo from './Components/Todo.js';
 
 class App extends React.Component {
   constructor(props){
@@ -46,7 +45,18 @@ class App extends React.Component {
           {/* list to display todo items */}
         <ul className='todo-list'>
           <Todo 
-            name='eat'
+            name='Eat'
+            completed={true}
+            deleteItem = {this.deleteItem} 
+          />
+          <Todo 
+            name='Sleep'
+            completed={false}
+            deleteItem = {this.deleteItem} 
+          />
+          <Todo 
+            name='Drink'
+            completed={false}
             deleteItem = {this.deleteItem} 
           />
           {/* <li>
