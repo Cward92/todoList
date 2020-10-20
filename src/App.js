@@ -1,16 +1,26 @@
 import React from 'react';
-import Todo from './Components/Todo.js';
+import Header from './Components/Header.js';
+import List from './Components/List.js';
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+    this.state = {
+      name: ['Eat', 'Sleep', 'Drink'],
+    };
 
     this.deleteItem = this.deleteItem.bind(this);
-  }
-  deleteItem() {
-    console.log('item deleted');
+    this.calcRemaining = this.calcRemaining.bind(this);
   }
 
+  deleteItem(x) {
+    console.log(x);
+    console.log('item deleted')
+  }
+
+  calcRemaining() {
+    console.log('These items are left');
+  }
   render() {
     return (
       <div className='container'>
@@ -39,59 +49,10 @@ class App extends React.Component {
           </button>
         </div>
         {/* header to display remaining todo items */}
-        <h2 id='list-heading'>
-          3 tasks remaining
-          </h2>
-          {/* list to display todo items */}
-        <ul className='todo-list'>
-          <Todo 
-            name='Eat'
-            completed={true}
-            deleteItem = {this.deleteItem} 
-          />
-          <Todo 
-            name='Sleep'
-            completed={false}
-            deleteItem = {this.deleteItem} 
-          />
-          <Todo 
-            name='Drink'
-            completed={false}
-            deleteItem = {this.deleteItem} 
-          />
-          {/* <li>
-            <div>
-              <input id='todo-1' type='checkbox' defaultChecked={false} />
-              <label className='todo-label'>
-                Sleep
-                </label>
-            </div>
-            <div className='btn-group'>
-              <button type='button' className='btn'>
-                Edit 
-              </button>
-              <button type='button' className='btn btn-danger'>
-                Delete 
-              </button>
-            </div>
-          </li>
-          <li>
-            <div>
-              <input id='todo-2' type='checkbox' defaultChecked={false} />
-              <label className='todo-label'>
-                Drink
-                </label>
-            </div>
-            <div className='btn-group'>
-              <button type='button' className='btn'>
-                Edit 
-              </button>
-              <button type='button' className='btn btn-danger'>
-                Delete 
-              </button>
-            </div>
-          </li> */}
-        </ul>
+        <Header calcRemaining={this.calcRemaining} />
+
+        {/* list to display todo items */}
+        <List names={this.state.name} deleteItem={this.deleteItem} />
       </div>
     );
   }
