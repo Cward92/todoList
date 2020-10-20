@@ -1,17 +1,23 @@
 import React from 'react';
+import Todo from './Todo.js';
 import './App.css';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+  deleteItem() {
+    console.log('item deleted');
+  }
+
   render() {
     return (
       <div className='container'>
         <h1>Todo List</h1>
+        {/* text form to input todo items */}
         <form>
-          <h2>
-            <label>
-              What needs doing?
-            </label>
-          </h2>
           <input
             type='text'
             id='new-todo-input'
@@ -21,6 +27,7 @@ class App extends React.Component {
           />
           <button type='submit' className='btn btn-success'>Add</button>
         </form>
+        {/* button group to filter todo items */}
         <div className='btn-group'>
           <button type='button' className='btn btn-light border btn-toggle'>
             <span>All</span>
@@ -32,27 +39,17 @@ class App extends React.Component {
             <span>Completed</span>
           </button>
         </div>
+        {/* header to display remaining todo items */}
         <h2 id='list-heading'>
           3 tasks remaining
           </h2>
+          {/* list to display todo items */}
         <ul className='todo-list'>
-          <li>
-            <div>
-              <input id='todo-0' type='checkbox' defaultChecked={true} />
-              <label className='todo-label'>
-                Eat
-                </label>
-            </div>
-            <div className='btn-group'>
-              <button type='button' className='btn'>
-                Edit
-              </button>
-              <button type='button' className='btn btn-danger'>
-                Delete
-              </button>
-            </div>
-          </li>
-          <li>
+          <Todo 
+            name='eat'
+            deleteItem = {this.deleteItem} 
+          />
+          {/* <li>
             <div>
               <input id='todo-1' type='checkbox' defaultChecked={false} />
               <label className='todo-label'>
@@ -83,7 +80,7 @@ class App extends React.Component {
                 Delete 
               </button>
             </div>
-          </li>
+          </li> */}
         </ul>
       </div>
     );
