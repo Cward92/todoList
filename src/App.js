@@ -26,8 +26,8 @@ class App extends React.Component {
   }
 
 
-  calcRemaining(props) {
-    return `${props} Items Are Left`;
+  calcRemaining(num) {
+    return `${num} Items Are Left`;
   }
   render() {
     return (
