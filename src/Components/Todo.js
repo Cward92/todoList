@@ -13,7 +13,7 @@ function Todo(props) {
         <button type='button' className='btn btn-secondary'>
           Edit
               </button>
-        <button type='button' className='btn btn-danger' onClick={() => props.deleteItem(props.name)}>
+        <button type='button' className='btn btn-danger' onClick={() => props.deleteItem(props.item)}>
           Delete
               </button>
       </div>

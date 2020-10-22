@@ -6,7 +6,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ['Eat', 'Sleep', 'Drink'],
+      items: [
+        { name: 'Eat', completed : true}, 
+        { name: 'Sleep', completed : false}, 
+        { name: 'Drink', completed : false}],
     };
 
     this.deleteItem = this.deleteItem.bind(this);
@@ -14,12 +17,17 @@ class App extends React.Component {
   }
 
   deleteItem(x) {
-    console.log(x);
-    console.log('item deleted')
+    let arr1 = this.state.items.filter((y) => {
+      if(y !== x){
+        return y;
+      }
+    });
+    this.setState({items : arr1});
   }
 
-  calcRemaining() {
-    console.log('These items are left');
+
+  calcRemaining(props) {
+    return `${props} Items Are Left`;
   }
   render() {
     return (
@@ -49,10 +57,10 @@ class App extends React.Component {
           </button>
         </div>
         {/* header to display remaining todo items */}
-        <Header calcRemaining={this.calcRemaining} />
+        <Header list={this.state.items} calcRemaining={this.calcRemaining} />
 
         {/* list to display todo items */}
-        <List names={this.state.name} deleteItem={this.deleteItem} />
+        <List items={this.state.items} deleteItem={this.deleteItem} />
       </div>
     );
   }
