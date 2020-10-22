@@ -1,19 +1,33 @@
 import React from 'react';
 import Header from './Components/Header.js';
 import List from './Components/List.js';
+import Filter from './Components/Filter.js';
+import Input from './Components/Input.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [
-        { name: 'Eat', completed : true}, 
+        { name: 'Eat', completed : false}, 
         { name: 'Sleep', completed : false}, 
         { name: 'Drink', completed : false}],
+      display: 'all',
     };
 
     this.deleteItem = this.deleteItem.bind(this);
     this.calcRemaining = this.calcRemaining.bind(this);
+    this.changeView = this.changeView.bind(this);
+    this.checkboxChange = this.checkboxChange.bind(this);
+    this.addItem = this.addItem.bind(this);
+
+  }
+
+  addItem(name) {
+    let newItems = this.state.items;
+    let obj = { name: name, completed: false};
+    newItems.push(obj);
+    this.setState({items : newItems});
   }
 
   deleteItem(x) {
@@ -23,8 +37,19 @@ class App extends React.Component {
       }
     });
     this.setState({items : arr1});
-  }
+  } 
 
+  checkboxChange(item) {
+    let arr1 = this.state.items;
+    item.completed = !item.completed;
+    this.setState( {item : arr1} );
+}
+
+  changeView(x) {
+    console.log('changing');
+    console.log(x);
+    this.setState({ display : x});
+  }
 
   calcRemaining(num) {
     return `${num} Items Are Left`;
@@ -34,33 +59,13 @@ class App extends React.Component {
       <div className='container'>
         <h1>Todo List</h1>
         {/* text form to input todo items */}
-        <form>
-          <input
-            type='text'
-            id='new-todo-input'
-            className='input'
-            name='text'
-            autoComplete='off'
-          />
-          <button type='submit' className='btn btn-success'>Add</button>
-        </form>
+        <Input addItem={this.addItem}/>
         {/* button group to filter todo items */}
-        <div className='btn-group'>
-          <button type='button' className='btn btn-light border btn-toggle'>
-            <span>All</span>
-          </button>
-          <button type='button' className='btn btn-light border toggle-btn'>
-            <span>Active</span>
-          </button>
-          <button type='button' className='btn btn-light border toggle-btn'>
-            <span>Completed</span>
-          </button>
-        </div>
+        <Filter changeView={this.changeView}/>
         {/* header to display remaining todo items */}
         <Header list={this.state.items} calcRemaining={this.calcRemaining} />
-
         {/* list to display todo items */}
-        <List items={this.state.items} deleteItem={this.deleteItem} />
+        <List display={this.state.display} checkboxChange={this.checkboxChange} items={this.state.items} deleteItem={this.deleteItem} />
       </div>
     );
   }

@@ -4,7 +4,7 @@ function Todo(props) {
   return (
     <li>
       <div>
-        <input id='todo-0' type='checkbox' defaultChecked={props.completed} />
+        <input id={props.name} type='checkbox' defaultChecked={props.completed} onChange={() => props.checkboxChange(props.item)}/>
         <label className='todo-label'>
           {props.name}
         </label>
